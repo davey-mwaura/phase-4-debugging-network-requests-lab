@@ -63,11 +63,14 @@ developing your own process.
 - Add a new toy when the toy form is submitted
 
   - How I debugged:
+  In the create action, I replaced Toys.create with Toy.new and added conditional statements to handle success and failure cases
 
 - Update the number of likes for a toy
 
   - How I debugged:
+  In the update action, I added conditional statements to handle success and failure cases
 
 - Donate a toy to Goodwill (and delete it from our database)
 
   - How I debugged:
+  In the destroy action, I added conditional statements to handle success and failure cases. In the success case, we use head :no_content to return an empty response with a 204 No Content status.

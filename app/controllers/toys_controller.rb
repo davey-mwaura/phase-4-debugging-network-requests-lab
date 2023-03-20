@@ -7,19 +7,33 @@ class ToysController < ApplicationController
   end
 
   def create
-    toy = Toys.create(toy_params)
-    render json: toy, status: :created
+    toy = Toy.new(toy_params)
+
+    if toy.save
+      render json: toy, status: :created
+    else
+      render json: toy.errors, status: :unprocessable_entity
+    end
   end
 
   def update
     toy = Toy.find_by(id: params[:id])
-    toy.update(toy_params)
+
+    if toy.update(toy_params)
+      render json: toy
+    else
+      render json: toy.errors, status: :unprocessable_entity
+    end
   end
 
   def destroy
     toy = Toy.find_by(id: params[:id])
-    toy.destroy
-    head :no_content
+
+    if toy.destroy
+      head :no_content
+    else
+      render json: { error: 'Failed to donate toy' }, status: :unprocessable_entity
+    end
   end
 
   private
